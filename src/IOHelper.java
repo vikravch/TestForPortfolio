@@ -15,7 +15,7 @@ import java.net.URLConnection;
 import java.util.Scanner;
 // класс, что организовывает ввод-вывод данных с консоли и файла
 public class IOHelper {
-	
+	public static final int BUFFER_SIZE = 2000;
 	// 1. write to file
 	// 2. read from file
 	// 3. read from console string
@@ -48,7 +48,7 @@ public class IOHelper {
 	public static void copyFile(String srcFileName, String destFileName) throws IOException {
 		InputStream is = new FileInputStream(srcFileName);
 		OutputStream os = new FileOutputStream(destFileName);
-		byte[] buffer = new byte[1000];
+		byte[] buffer = new byte[BUFFER_SIZE];
 		int length = 0;
 		while((length = is.read(buffer))>0) {
 			os.write(buffer, 0, length);
@@ -63,7 +63,7 @@ public class IOHelper {
 		InputStream is = conn.getInputStream();
 		
 		OutputStream os = new FileOutputStream(destFileName);
-		byte[] buffer = new byte[1000];
+		byte[] buffer = new byte[BUFFER_SIZE];
 		int length = 0;
 		while((length = is.read(buffer))>0) {
 			os.write(buffer, 0, length);
@@ -95,7 +95,7 @@ public class IOHelper {
 		} catch (IOException e) {
 			return 0;
 		} catch (NumberFormatException e) {
-			System.out.println("Error, please try again:");
+			System.out.println("Error, please type another value again:");
 			return readFromConsoleInt();
 		}
 	}
